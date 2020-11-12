@@ -1,0 +1,29 @@
+﻿.card-outline-primary {
+    float: left;
+    margin-bottom:30px;
+}
+
+.card-outline-primary .body {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+}
+.col-9 .btn-group {
+    width:100%;
+    display:block;
+    text-align:center;
+    clear:both;
+}
+.col-9 .btn-group a {
+    background: #1672e2;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #fff;
+    margin:0 5px;
+}
+.navbar-brand a{
+    color:#fff;
+}
+.navbar-brand a:hover{
+    text-decoration:none;
+}
