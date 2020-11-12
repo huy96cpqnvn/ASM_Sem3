@@ -74,6 +74,7 @@ namespace CoffeeShop.Models
                     }
 
                 );
+                context.SaveChanges();
             }
         }
 

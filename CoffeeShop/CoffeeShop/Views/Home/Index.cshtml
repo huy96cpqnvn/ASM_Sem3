@@ -1,8 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model CoffeeShop.Models.ViewModels.ProductListViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@foreach (var p in Model.Products)
+{
+    <partial name="ProductSummary" model="p" />
+}
+<div page-model="@Model.PageInfo" 
+     page-action="Index" 
+     page-classes-enabled="true"
+     page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary"
+     page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right m-1"></div>
+

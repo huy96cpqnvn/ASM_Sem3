@@ -6,22 +6,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoffeeShop.Models;
+using CoffeeShop.Models.ViewModels;
 
 namespace CoffeeShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private IStoreRepository repository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public int PageSize = 4;
+        public HomeController(IStoreRepository repo)
         {
-            _logger = logger;
+            repository = repo;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index(string category, int productPage = 1)
+            => View(new ProductListViewModel
+                    {
+                        Products = repository.Products
+                        .Where(p => category == null || p.Category == category)
+                        .OrderBy(p => p.ProductId)
+                        .Skip((productPage - 1) * PageSize)
+                        .Take(PageSize),
+                        PageInfo = new PageInfo
+                        {
+                            CurrentPage = productPage,
+                            ItemsPerPage = PageSize,
+                            TotalItems = category == null ? 
+                            repository.Products.Count() : 
+                            repository.Products.Where(e => e.Category == category).Count()
+                        },
+                        CurrentCategory = category
+                    }
+                );
+        
 
         public IActionResult Privacy()
         {
